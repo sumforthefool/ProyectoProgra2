@@ -1,0 +1,59 @@
+--------------------------------------------------------
+-- Archivo creado  - viernes-abril-19-2024   
+--------------------------------------------------------
+--------------------------------------------------------
+--  DDL for Table TALONARIO
+--------------------------------------------------------
+
+  CREATE TABLE "C##PRUEBA"."TALONARIO" 
+   (	"ID_TALONARIO" NUMBER(*,0), 
+	"DESCRIPCION" VARCHAR2(255 BYTE), 
+	"PREMIO" VARCHAR2(255 BYTE), 
+	"FECHA" VARCHAR2(10 BYTE), 
+	"VALOR_NUMERO" NUMBER(*,0)
+   ) SEGMENT CREATION IMMEDIATE 
+  PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 
+ NOCOMPRESS LOGGING
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+REM INSERTING into C##PRUEBA.TALONARIO
+SET DEFINE OFF;
+Insert into C##PRUEBA.TALONARIO (ID_TALONARIO,DESCRIPCION,PREMIO,FECHA,VALOR_NUMERO) values ('3','cerveza','cerveza','1475-05-08','80');
+Insert into C##PRUEBA.TALONARIO (ID_TALONARIO,DESCRIPCION,PREMIO,FECHA,VALOR_NUMERO) values ('1','Tómbola cultural','Entradas para el teatro','10/05/24','1500');
+Insert into C##PRUEBA.TALONARIO (ID_TALONARIO,DESCRIPCION,PREMIO,FECHA,VALOR_NUMERO) values ('2','Se recaundan fondos','Pizza','2024-02-18','100');
+--------------------------------------------------------
+--  DDL for Index SYS_C008336
+--------------------------------------------------------
+
+  CREATE UNIQUE INDEX "C##PRUEBA"."SYS_C008336" ON "C##PRUEBA"."TALONARIO" ("ID_TALONARIO") 
+  PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS" ;
+--------------------------------------------------------
+--  DDL for Trigger TALONARIO_TRIGGER
+--------------------------------------------------------
+
+  CREATE OR REPLACE EDITIONABLE TRIGGER "C##PRUEBA"."TALONARIO_TRIGGER" 
+BEFORE INSERT ON Talonario
+FOR EACH ROW
+BEGIN
+    SELECT talonario_seq.NEXTVAL
+    INTO :new.id_talonario
+    FROM dual;
+END;
+/
+ALTER TRIGGER "C##PRUEBA"."TALONARIO_TRIGGER" ENABLE;
+--------------------------------------------------------
+--  Constraints for Table TALONARIO
+--------------------------------------------------------
+
+  ALTER TABLE "C##PRUEBA"."TALONARIO" ADD PRIMARY KEY ("ID_TALONARIO")
+  USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 
+  STORAGE(INITIAL 65536 NEXT 1048576 MINEXTENTS 1 MAXEXTENTS 2147483645
+  PCTINCREASE 0 FREELISTS 1 FREELIST GROUPS 1
+  BUFFER_POOL DEFAULT FLASH_CACHE DEFAULT CELL_FLASH_CACHE DEFAULT)
+  TABLESPACE "USERS"  ENABLE;
